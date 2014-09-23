@@ -1,1 +1,13 @@
-This readme is awesome.
+This project is for practicing HTML, JS and XML.
+
+Using HTML and JS to read an local disk XML file and create a table to show requirement contexts.
+
+Also show an summary of the XML file.
+
+
+Learning experience:
+
+1. JS DOM getElementsByTagName will check all the same tag name in given domain or scope.
+
+2. JS using parseInt("String") //convert String to Int
+

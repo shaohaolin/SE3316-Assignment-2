@@ -4,59 +4,8 @@
         <title>Read a data set in XML format</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="script.js"></script>
     </head>
-    <body>
-        <script>
-            if (window.XMLHttpRequest)
-            {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            }
-            else
-            {// code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.open("GET", "mondial.xml", false);
-            xmlhttp.send();
-            xmlDoc = xmlhttp.responseXML;
-
-            document.write("<table border='1'>");
-            
-            document.write("<tr><td><b>Country</b></td><td><b>Capital</b></td><td><b>Provinces</b></td><td><b>Population</b</td></tr>");
-            
-            var x = xmlDoc.getElementsByTagName("country");
-            for (i = 0; i < x.length; i++)
-            {
-                document.write("<tr><td>");
-                document.write(x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue);
-                document.write("</td><td>");
-
-                var x2 = x[i].getElementsByTagName("province");
-                var provinces = new Array();
-                var capital;
-
-                for (j = 0; j < x2.length; j++)
-                {
-                    provinces.push(" " + x2[j].getElementsByTagName("name")[0].childNodes[0].nodeValue);
-                }
-
-                var x3 = x[i].getElementsByTagName("city");
-
-                for (var k = 0; k < x3.length; k++) 
-                {
-                    if (x3[k].getAttribute("is_country_cap") === "yes")
-                        capital = x3[k].getElementsByTagName("name")[0].childNodes[0].nodeValue;
-                }
-
-                document.write(capital);
-                document.write("</td><td>");
-
-                document.write(provinces);
-                document.write("</td><td>");
-
-                document.write(x[i].getElementsByTagName("population")[0].childNodes[0].nodeValue);
-                document.write("</td></tr>");
-            }
-            document.write("</table>");
-        </script>
+    <body onload="load()"> 
     </body>
 </html>
