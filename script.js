@@ -1,4 +1,17 @@
-function load() {
+function run() {
+    
+    var selVal = document.getElementById("coSelect").value;
+    if (selVal == "all") { readData(0); }
+    else if (selVal == "europe") { readData(1); }
+    else if (selVal == "asia")  { readData(2); }
+    else if (selVal == "africa") {  readData(3);}
+    else if (selVal == "america") { readData(4); }
+    else if (selVal == "australia") { readData(5); }
+}  
+
+      
+function readData(choice) {
+
 if (window.XMLHttpRequest)
             {// code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp = new XMLHttpRequest();
@@ -10,22 +23,34 @@ if (window.XMLHttpRequest)
             xmlhttp.open("GET", "mondial.xml", false);
             xmlhttp.send();
             xmlDoc = xmlhttp.responseXML;
-
-            document.write("<table border='1'>");
-            
-            document.write("<tr><td><b>Country</b></td><td><b>Capital</b></td><td><b>Provinces</b></td><td><b>Population</b</td></tr>");
-            
+    
+            var conArray = ["all","europe","asia","africa","america","australia"];
+    
+        
             var readContinent = xmlDoc.getElementsByTagName("continent");
             var numOfContinent = readContinent.length; // summary of continent
+            
+            
     
             var x = xmlDoc.getElementsByTagName("country");
             var numOfCountry = x.length; // summary of country
             
             var numOfCity = xmlDoc.getElementsByTagName("city").length;
             var numOfPopulation = 0;
+            
+            document.write("<table border='1'>");
+            
+            document.write("<tr><td><b>Country</b></td><td><b>Capital</b></td><td><b>Provinces</b></td><td><b>Population</b</td></tr>");
+            
+            
     
             for (i = 0; i < x.length; i++)
             {
+                var checkContinent = x[i].getElementsByTagName("encompassed");
+                var attnode = checkContinent[0].getAttributeNode("continent");
+                if (attnode.value == conArray[choice])
+                {
+                            
                 document.write("<tr><td>");
                 document.write(x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue);
                 document.write("</td><td>");
@@ -57,6 +82,7 @@ if (window.XMLHttpRequest)
                 numOfPopulation = numOfPopulation + parseInt(temp_population);
                 document.write(temp_population);
                 document.write("</td></tr>");
+               }
             }
             document.write("</table>");
     

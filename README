@@ -11,3 +11,7 @@ Learning experience:
 
 2. JS using parseInt("String") //convert String to Int
 
+3. document.write function will refresh a html page. It's better to call this function when the page is loading. Otherwise it will overlap the content in current page.
+
+4. Create a basic dropdown list in HTML and interact with the database using onchange() function.
+
